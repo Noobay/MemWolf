@@ -1,0 +1,5 @@
+﻿  MemoryRead.cpp
+MemoryRead.cpp(85): warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+  nsScriptableObjectOverwolfSample.cpp
+nsScriptableObjectOverwolfSample.cpp(256): error C2059: syntax error : ';'
+  Generating Code...
