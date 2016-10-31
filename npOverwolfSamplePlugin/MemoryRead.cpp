@@ -1,93 +1,24 @@
 #include "MemoryRead.h"
-#include <Windows.h>
-#include <Psapi.h>
-#include <Windows.h>
-#include <Psapi.h>
-#include <iostream>
 
-#include <stdio.h>
-#include <WinBase.h>
-#include <libloaderapi.h>
-#include <winternl.h>
-
-#define PROC_BASIC_INFO 0
-#define NT_WOW64_QUERY_INFORMATION_PROCESS_64_NAME  "NtWow64QueryInformationProcess64"
-#define NT_WOW64_READ_VIRTUAL_MEMORY_64_NAME  "NtWow64ReadVirtualMemory64"
-
-typedef UINT64 SYM;
-typedef SIZE_T SIZE_T64;
-
-template<typename _ret_t> _ret_t ReadMemory(_ret_t& ret);
-template<typename _ret_t> _ret_t ReadMemory64(_ret_t& ret);
-bool SetWow64Params(BOOL& b_IsWow64Process, DWORD& dw_ProcessParametersOffset, DWORD dw_CommandLineOffset);
-
-HWND   WINDOW_HANDLE;
-HANDLE PROC_HANDLE;
-DWORD PROC_ID;
-ULONGLONG address;
-UINT64 address64;
-SIZE_T bytesRead;
-SIZE_T64 bytesRead64;
-
-using namespace std;
-
-
-//initialize variables for importing of essential 64 bit reading functions
-//from ntdll
-typedef NTSTATUS(NTAPI *FUNC_NtReadVirtualMemory64)
-( 
-	IN  HANDLE  ProcessHandle,
-	IN  PVOID64 BaseAddress,
-    OUT void*   Buffer,
-	IN  ULONGLONG BufferLength,
-	OUT PULONGLONG ReturnLength OPTIONAL
-);
-typedef NTSTATUS (NTAPI *FUNC_NtWow64QueryInformationProcess64) 
-(
-	IN  HANDLE ProcessHandle,
-	IN  ULONG  ProcessInformationClass,
-	OUT PVOID  ProcessInformation64,
-	IN  ULONG  Length,
-	OUT PULONG ReturnLength OPTIONAL
-);
-
-struct PROCESS_BASIC_INFORMATION64 {
-
-	SYM Reserved1;
-	SYM PebBaseAddress;
-	SYM Reserved2[2];
-	SYM UniqueProcessId;
-	SYM Reserved3;
-	/*
-	NTSTATUS ExitStatus;
-	ULONG64 PebBaseAddress;
-	ULONG64 AffinityMask;
-	LONG    BasePriority;
-	UINT64  Reserved1;
-	ULONG64 UniqueProcessId;
-	ULONG64 InheritedFromUniqueProcessId;
-	*/
-};
-
-
-
-HINSTANCE ntdll = LoadLibrary("ntdll.dll");
-FUNC_NtWow64QueryInformationProcess64 NtWow64QueryInformationProcess64 = (FUNC_NtWow64QueryInformationProcess64)GetProcAddress(ntdll, NT_WOW64_QUERY_INFORMATION_PROCESS_64_NAME);
-FUNC_NtReadVirtualMemory64 NtReadVirtualMemory64 = (FUNC_NtReadVirtualMemory64)GetProcAddress(ntdll, NT_WOW64_READ_VIRTUAL_MEMORY_64_NAME);
-
+//Read 32-bit 
 int Init32To64MemoryRead(const char* windowClass, const char* caption, SYM addressOffset)
 {
-
+	
 	DWORD cbNeeded;
 	DWORD dwdResult;
-	HMODULE mainModule;
 	BOOL enumResult;
 	ULONG read_length=0;
 	HINSTANCE ntdll; 
 	PROCESS_BASIC_INFORMATION64 procInfo;
+	PPEB_LDR_DATA64 pld;
+
+//allocate memory for function-scope variables
+#pragma allocate memory 
+	pld = (PPEB_LDR_DATA64)malloc(sizeof(PEB_LDR_DATA64));
+#pragma endregion
+	 
 	ZeroMemory(&procInfo, sizeof(procInfo));
 	
-
 	
 	//Get the window handle
 	WINDOW_HANDLE = FindWindow(windowClass, NULL);
@@ -107,8 +38,9 @@ int Init32To64MemoryRead(const char* windowClass, const char* caption, SYM addre
 	}
 
 	//Open the process
-	PROC_HANDLE = OpenProcess(PROCESS_ALL_ACCESS, false, PROC_ID);
+	PROC_HANDLE = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, false, PROC_ID);
 
+	address64 = addressOffset;
 	if (PROC_HANDLE == NULL)
 	{
 		//Process failed to open
@@ -116,42 +48,41 @@ int Init32To64MemoryRead(const char* windowClass, const char* caption, SYM addre
 	}
 	DWORD result;
 	
+	//Query the process information
  	result = NtWow64QueryInformationProcess64( PROC_HANDLE, 0, &procInfo, sizeof(procInfo), &read_length);
-	
 	if (result != 0)
 	{
-		cerr << "Query Information Process has failed" << endl;
-	
+		//Failed to query process information
 		return 40;
 	}
 	
-	PEB *peb = (PEB*)procInfo.PebBaseAddress;
-	
-	address64 = procInfo.PebBaseAddress + addressOffset;
-	
-	//* lazy debug
-	cerr << address64 << endl;
+	NtReadVirtualMemory64(PROC_HANDLE, (PVOID64)(procInfo.PebBaseAddress/* + sizeof(BYTE) * 8*/), pld,  sizeof(PEB_LDR_DATA64), NULL);
+		
+	byte value = 0;
 
- 	string number;
-	stringstream stristream;
+	address64 = (SYM)(pld->MainHandle+addressOffset);
 
-	stristream << address64;
-	stristream >> number;
-	//*/
-	UINT64 testByte = 120;
-	(UINT64)ReadMemory64<UINT64>(testByte);
-	cout << "RESULT: " << (UINT64)testByte << endl;
-	system("PAUSE");
+	(byte)ReadMemory64<byte>();
+ 
+ 	cout << "RESULT: " << (short)value << endl;
+	cout << address64 << endl;
+#pragma region release pointers
+	//release pointers
+	free(pld);
+#pragma endregion
+
 	return 1;
 }
 
+
+//Memory Reading Functions
+#pragma region Memory Reading Functions
 /*
 Initiate Memory Reading, 
-get the application's main process Handle, and entry point from it's main module.
+get the application's main process Handle, an5d entry point from it's main module.
 we have to compile on x64(64bit) to be able to read 64bit and 32bit(x86) processes.
 since Overwolf is a 32bit application, this will not be able to inherently read x64 processes since EnumProcessModules will not succeed!
 */
-
 int InitReadMemory(const char* windowClass, const char* caption, DWORD addressOffset)
 {
 
@@ -186,11 +117,7 @@ int InitReadMemory(const char* windowClass, const char* caption, DWORD addressOf
 		return 30;
 	}
 
-	//Check if the main Process is a Wow64Process, if it is, fill up the necesarry options
-	BOOL b_IsWow64Proc;
-	DWORD procOffset;
-	DWORD cmdOffset;
-	SetWow64Params(b_IsWow64Proc, procOffset, cmdOffset);
+
 	/*
 	*Get the Main Module-
 	*first entry in the returned HMODULE array from
@@ -223,28 +150,41 @@ int InitReadMemory(const char* windowClass, const char* caption, DWORD addressOf
 
 	byte testByte = 0 ;
 
-	(byte)ReadMemory<byte>(testByte);
+	(byte)ReadMemory<byte>();
 	cout << "the value: " << (short)testByte  << "\r\nwas returned from memory address: " << number << "\r\nexecutable located in: " << mainModule << endl;
 	system("PAUSE");
 
 	return 1;
 }
+#pragma endregion
 
-
-template<typename _ret_t> _ret_t ReadMemory(_ret_t& ret)
-{
-	
+#pragma region Memory Reading Functions
+template<typename _ret_t> _ret_t ReadMemory()
+{ 
+	static_assert(!std::_Is_pointer<_ret_t>::value, "The type _ret_t must not be a pointer!");
+	_ret_t ret = NULL;
+	/* DEBUG 
+	cout << GetLastError() << endl;*/
 	ReadProcessMemory(PROC_HANDLE, (void*)address, &ret, sizeof(ret), &bytesRead);
-
+	/*cout << GetLastError() << endl;*/
 	return ret;
 	
- };
-
+ }
  
-template <typename _ret_t> _ret_t ReadMemory64(_ret_t& ret)
+template <typename _ret_t> _ret_t ReadMemory64()
 {
-    
-	NTSTATUS result = NtReadVirtualMemory64(PROC_HANDLE, (PVOID64)(0x7FF71D7605AB), &ret, sizeof(_ret_t), NULL);
+	static_assert(!std::_Is_pointer<_ret_t>::value, "The type _ret_t must not be a pointer!");
+	_ret_t ret = NULL;
+	NTSTATUS result = NtReadVirtualMemory64(PROC_HANDLE, (PVOID64)(address64), &ret, sizeof(ret), NULL);
+
+	///* Debug # too lazy for breakpoints0101
+	if (result != 0)
+	{
+		cerr << "ReadMemory Failed.\r\nAddress: " << address64 << "\r\nSize: " << sizeof(_ret_t) << "\r\nResult: " << result << endl;
+		cerr << "NtReadVirtualMemory64 has failed" << endl;
+		system("PAUSE");
+
+	} //*/
 
 	return ret;
  };
@@ -264,35 +204,15 @@ bool isLootAvailable()
 }
 */
 
-bool FinishReadingMemory()
+bool FinishReadingMemory() 
 {
 	return CloseHandle(PROC_HANDLE);
 }
 
 
-bool SetWow64Params(BOOL& b_IsWow64Process, DWORD& dw_ProcessParametersOffset, DWORD dw_CommandLineOffset)
-{
-	SYSTEM_INFO si;
-	GetNativeSystemInfo(&si);
-
-	IsWow64Process(GetCurrentProcess(), &b_IsWow64Process);
-
-	if(si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64)
-	{
-		dw_ProcessParametersOffset =  0x20;
-		dw_CommandLineOffset = 0x70;
-	}
-	else
-	{
-		dw_ProcessParametersOffset = 0x10;
-		dw_CommandLineOffset = 0x40;
-	}
-}
-w
-using namespace std;
 int main()
 {
-		
+	//InitReadMemory("ArenaNet_Dx_Window_Class", NULL, (UINT)0x1D205AB);
 	Init32To64MemoryRead("ArenaNet_Dx_Window_Class", NULL, (UINT64)0x1D205AB);
 	system("PAUSE");
 
