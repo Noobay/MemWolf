@@ -53,7 +53,7 @@ typedef NTSTATUS(NTAPI *FUNC_NtWow64QueryInformationProcess64)
 
 //64-bit data structures and data types essential for conversion for use with 64-bit functions.
 //NOTE: Some structures are entirely different from their 32-bit counterparts (not only in sizes, but in structure itself). 
-#pragma region 64bit structures and types
+#pragma region _64bit structures and types
 
 //type redefinitions for a better understanding of the code(the current ones aren't necessarry) 
 #pragma region 64-bit type definitions 

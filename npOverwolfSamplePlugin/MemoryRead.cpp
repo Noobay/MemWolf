@@ -161,7 +161,7 @@ int InitReadMemory(const char* windowClass, const char* caption, DWORD addressOf
 #pragma region Memory Reading Functions
 template<typename _ret_t> _ret_t ReadMemory()
 { 
-	static_assert(!std::_Is_pointer<_ret_t>::value, "The type _ret_t must not be a pointer!");
+	static_assert(!std::is_pointer<_ret_t>::value, "The type _ret_t must not be a pointer!");
 	_ret_t ret = NULL;
 	/* DEBUG 
 	cout << GetLastError() << endl;*/
@@ -173,7 +173,7 @@ template<typename _ret_t> _ret_t ReadMemory()
  
 template <typename _ret_t> _ret_t ReadMemory64()
 {
-	static_assert(!std::_Is_pointer<_ret_t>::value, "The type _ret_t must not be a pointer!");
+	static_assert(!std::is_pointer<_ret_t>::value, "The type _ret_t must not be a pointer!");
 	_ret_t ret = NULL;
 	NTSTATUS result = NtReadVirtualMemory64(PROC_HANDLE, (PVOID64)(address64), &ret, sizeof(ret), NULL);
 

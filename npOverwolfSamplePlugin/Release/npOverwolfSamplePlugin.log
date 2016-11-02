@@ -1,5 +1,6 @@
 ﻿  MemoryRead.cpp
-MemoryRead.cpp(85): warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
-  nsScriptableObjectOverwolfSample.cpp
-nsScriptableObjectOverwolfSample.cpp(256): error C2059: syntax error : ';'
-  Generating Code...
+MemoryRead.cpp(16): warning C4068: unknown pragma
+MemoryRead.cpp(11): warning C4101: 'ntdll' : unreferenced local variable
+MemoryRead.cpp(9): warning C4101: 'enumResult' : unreferenced local variable
+MemoryRead.cpp(7): warning C4101: 'cbNeeded' : unreferenced local variable
+MemoryRead.cpp(209): warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
