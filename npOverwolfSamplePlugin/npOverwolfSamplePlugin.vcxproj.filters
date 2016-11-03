@@ -28,8 +28,11 @@
     <ClCompile Include="nsPluginInstanceOverwolfSample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryRead.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MemWolf.cpp">
+      <Filter>Source Files\MemWolf</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryReader.cpp">
+      <Filter>Source Files\MemoryReader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,8 +58,11 @@
       <Filter>Header Files\plugin_common</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="MemoryRead.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MemWolf.h">
+      <Filter>Header Files\MemWolf</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryReader.h">
+      <Filter>Header Files\MemoryReader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +86,18 @@
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{b659ece1-45d1-4758-9ed2-c0da2a107e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MemWolf">
+      <UniqueIdentifier>{60d08ec2-edcc-464f-9800-7ff45654233e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MemoryReader">
+      <UniqueIdentifier>{c79a07a6-c650-4d89-8da9-88e42289ef99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MemWolf">
+      <UniqueIdentifier>{55661345-ac8b-4c16-995c-b98e9a1c6a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MemoryReader">
+      <UniqueIdentifier>{cb11ccc7-84d8-4e4d-b1f0-4c5428b54275}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

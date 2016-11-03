@@ -2,8 +2,11 @@
   Overwolf Sample Plugin
   Copyright (c) 2014 Ovefwolf Ltd.
 */
+#include "MemWolf.h"
 #include "nsScriptableObjectOverwolfSample.h"
 #include "utils/Thread.h"
+
+MemWolfObject memWolfReader;
 
 #define REGISTER_METHOD(name, method) { \
   methods_[NPN_GetStringIdentifier(name)] = &method; \
@@ -202,36 +205,8 @@ void nsScriptableObjectOverwolfSample::EchoTask(
     message.size(),
     arg);
 
-	//current addr is 1D1B8FB 
-	/*
-	<?xml version="1.0" encoding="utf-8"?>
-<CheatTable>
-  <CheatEntries>
-    <CheatEntry>
-      <ID>1</ID>
-      <Description>"No description"</Description>
-      <LastState Value="0" RealAddress="7FF79FB6B8FB"/>
-      <VariableType>Byte</VariableType>
-      <Address>"Gw2-64.exe"+1D1B8FB</Address>
-    </CheatEntry>
-  </CheatEntries>
-</CheatTable>
-*/
-/*
-	<?xml version="1.0" encoding="utf-8"?>
-<CheatTable>
-  <CheatEntries>
-    <CheatEntry>
-      <ID>0</ID>
-      <Description>"No description"</Description>
-      <LastState Value="64" RealAddress="7FF79FB6B8FB"/>
-      <VariableType>Byte</VariableType>
-      <Address>"Gw2-64.exe"+1D1B8FB</Address>
-    </CheatEntry>
-  </CheatEntries>
-</CheatTable>
-*/
-  INT32_TO_NPVARIANT(InitReadMemory(message.c_str(), caption.c_str(), offset),arg);
+	
+  INT32_TO_NPVARIANT(memWolfReader.InitMemoryRead(message.c_str(), caption.c_str(), offset),arg);
   //STRINGN_TO_NPVARIANT(message.c_str(),message.size(),arg);
   // fire callback
   NPN_InvokeDefault(
@@ -244,6 +219,35 @@ void nsScriptableObjectOverwolfSample::EchoTask(
   NPN_ReleaseVariantValue(&ret_val);
 }
 
+void nsScriptableObjectOverwolfSample::Echo64Task(
+	const std::string& message, const std::string& caption, double offset, NPObject* callback) {
+
+	if (shutting_down_) {
+		return;
+	}
+
+	NPVariant arg;
+	NPVariant ret_val;
+
+	STRINGN_TO_NPVARIANT(
+		message.c_str(),
+		message.size(),
+		arg);
+
+
+	INT32_TO_NPVARIANT(memWolfReader.InitMemoryRead64(message.c_str(), caption.c_str(), offset), arg);
+	//STRINGN_TO_NPVARIANT(message.c_str(),message.size(),arg);
+	// fire callback
+	NPN_InvokeDefault(
+		__super::npp_,
+		callback,
+		&arg,
+		1,
+		&ret_val);
+
+	NPN_ReleaseVariantValue(&ret_val);
+}
+
 void nsScriptableObjectOverwolfSample::AddTask(
   NPObject* callback) {
   if (shutting_down_) {
@@ -253,7 +257,7 @@ void nsScriptableObjectOverwolfSample::AddTask(
   NPVariant arg;
   NPVariant ret_val;
 
-  DOUBLE_TO_NPVARIANT(, arg);
+  BOOLEAN_TO_NPVARIANT(memWolfReader.IsLootAvailable(), arg);
 
   // fire callback
   NPN_InvokeDefault(
@@ -266,13 +270,36 @@ void nsScriptableObjectOverwolfSample::AddTask(
   NPN_ReleaseVariantValue(&ret_val);
 }
 
+void nsScriptableObjectOverwolfSample::Add64Task(
+	NPObject* callback) {
+	if (shutting_down_) {
+		return;
+	}
+
+	NPVariant arg;
+	NPVariant ret_val;
+	
+	BOOLEAN_TO_NPVARIANT(memWolfReader.IsLootAvailable64(), arg);
+
+	// fire callback
+	NPN_InvokeDefault(
+		__super::npp_,
+		callback,
+		&arg,
+		1,
+		&ret_val);
+
+	NPN_ReleaseVariantValue(&ret_val);
+}
+
 void nsScriptableObjectOverwolfSample::FinishReadingTask(
   NPObject* callback) {
   if (shutting_down_) {
     return;
   }
 
-  FinishReadingMemory();
+  memWolfReader.FinishReadingMemory();
+ 
   NPVariant arg;
   NPVariant ret_val;
 

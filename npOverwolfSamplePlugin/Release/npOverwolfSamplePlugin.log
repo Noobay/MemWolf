@@ -1,6 +1,3 @@
-﻿  MemoryRead.cpp
-MemoryRead.cpp(16): warning C4068: unknown pragma
-MemoryRead.cpp(11): warning C4101: 'ntdll' : unreferenced local variable
-MemoryRead.cpp(9): warning C4101: 'enumResult' : unreferenced local variable
-MemoryRead.cpp(7): warning C4101: 'cbNeeded' : unreferenced local variable
-MemoryRead.cpp(209): warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+﻿  MemWolf.cpp
+     Creating library .\Release\npOverwolfSamplePlugin.lib and object .\Release\npOverwolfSamplePlugin.exp
+  npOverwolfSamplePlugin.vcxproj -> C:\Users\user\Documents\My Repositories\MemoryRead\overwolfmemoryread\npOverwolfSamplePlugin\.\Release\npOverwolfSamplePlugin.dll

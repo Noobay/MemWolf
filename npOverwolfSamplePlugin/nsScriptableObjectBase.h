@@ -6,7 +6,6 @@
 #define NSSCRIPTABLEOBJECTBASE_H_
 
 #include <windows.h>
-
 //#include "plugin_common/npplat.h"
 #include "plugin_common/pluginbase.h"
 

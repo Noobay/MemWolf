@@ -1,13 +1,17 @@
 /*
   Overwolf Sample Plugin
-  Copyright (c) 2014 Ovefwolf Ltd.
+  Copyright (c) 2014 Overwolf Ltd.
 */
 #ifndef NNSSCRIPTABLEOBJECTOVERWOLFSAMPLE_H_
 #define NNSSCRIPTABLEOBJECTOVERWOLFSAMPLE_H_
 
+//plugin-specific dependencies
+
 #include "nsScriptableObjectBase.h"
-#include "MemoryRead.h"
 #include <map>
+
+
+
 
 namespace utils {
 class Thread; // forward declaration
@@ -40,19 +44,33 @@ private:
   // thread).  To achieve this, we create a Task function (see Thread.h) that 
   // runs on a separate thread triggers a callback
 
-  // echo("echoMessage", function(echoMessage) { console.log(echoMessage) });
-  bool Echo(
+  // Initiate Memory Reading 
+	bool Echo(
     NPIdentifier name, 
     const NPVariant *args, 
     uint32_t argCount, 
     NPVariant *result);
 
-  // add(first, second, function(answer) { console.log(answer) })
-  bool Add(
+	// Initiate Memory Reading for 64-bit Process
+	bool Echo64(
+	  NPIdentifier name,
+	  const NPVariant *args,
+	  uint32_t argCount,
+	  NPVariant *result);
+
+  // Check Memory for loot Availability
+    bool Add(
     NPIdentifier name, 
     const NPVariant *args, 
     uint32_t argCount, 
     NPVariant *result);
+
+  // Check Memory for Loot Availability on 64-bit Process
+  bool Add64(
+	  NPIdentifier name,
+	  const NPVariant *args,
+	  uint32_t argCount,
+	  NPVariant *result);
   
   bool FinishReading(
     NPIdentifier name, 
@@ -70,8 +88,17 @@ private:
 	double offset,
     NPObject* callback);
 
+  void Echo64Task(
+	  const std::string& message,
+	  const std::string& caption,
+	  double offset,
+	  NPObject* callback);
+
   void AddTask(
     NPObject* callback);
+
+  void Add64Task(
+	  NPObject* callback);
 
   void FinishReadingTask(
     NPObject* callback);
@@ -103,6 +130,5 @@ private:
 DECLARE_NPOBJECT_CLASS_WITH_BASE(
   nsScriptableObjectOverwolfSample, 
   AllocateNpObject<nsScriptableObjectOverwolfSample>);
-
 
 #endif // NNSSCRIPTABLEOBJECTOVERWOLFSAMPLE_H_
