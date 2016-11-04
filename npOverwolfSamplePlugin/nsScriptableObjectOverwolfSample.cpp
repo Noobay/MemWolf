@@ -30,7 +30,9 @@ nsScriptableObjectOverwolfSample::~nsScriptableObjectOverwolfSample(void) {
 
 bool nsScriptableObjectOverwolfSample::Init() {
   REGISTER_METHOD("echo", nsScriptableObjectOverwolfSample::Echo);
+  REGISTER_METHOD("echo64", nsScriptableObjectOverwolfSample::Echo64);
   REGISTER_METHOD("add", nsScriptableObjectOverwolfSample::Add);
+  REGISTER_METHOD("add64", nsScriptableObjectOverwolfSample::Add64);
 
   sample_property_ = 42;
 
@@ -139,6 +141,47 @@ bool nsScriptableObjectOverwolfSample::Echo(
       NPVARIANT_TO_OBJECT(args[3])));
 }
 
+bool nsScriptableObjectOverwolfSample::Echo64(
+	NPIdentifier name,
+	const NPVariant *args,
+	uint32_t argCount,
+	NPVariant *result) {
+
+	if (argCount < 2 ||
+		!NPVARIANT_IS_STRING(args[0]) ||
+		!NPVARIANT_IS_STRING(args[1]) ||
+		!NPVARIANT_IS_DOUBLE(args[2]) ||
+		!NPVARIANT_IS_OBJECT(args[3])) {
+		NPN_SetException(this, "invalid params passed to function");
+		return true;
+	}
+
+	// add ref count to callback object so it won't delete
+	NPN_RetainObject(NPVARIANT_TO_OBJECT(args[3]));
+
+	// convert into std::string
+	std::string message;
+	std::string caption;
+
+	message.append(
+		NPVARIANT_TO_STRING(args[0]).UTF8Characters,
+		NPVARIANT_TO_STRING(args[0]).UTF8Length);
+	caption.append(
+		NPVARIANT_TO_STRING(args[1]).UTF8Characters,
+		NPVARIANT_TO_STRING(args[1]).UTF8Length);
+
+	double offset = NPVARIANT_TO_DOUBLE(args[2]);
+	// post to separate thread so that we are responsive
+	return thread_->PostTask(
+		std::bind(
+			&nsScriptableObjectOverwolfSample::Echo64Task,
+			this,
+			message,
+			caption,
+			offset,
+			NPVARIANT_TO_OBJECT(args[3])));
+}
+
 bool nsScriptableObjectOverwolfSample::Add(
   NPIdentifier name, 
   const NPVariant *args, 
@@ -160,6 +203,29 @@ bool nsScriptableObjectOverwolfSample::Add(
       &nsScriptableObjectOverwolfSample::AddTask, 
       this,  
       NPVARIANT_TO_OBJECT(args[0])));
+}
+
+bool nsScriptableObjectOverwolfSample::Add64(
+	NPIdentifier name,
+	const NPVariant *args,
+	uint32_t argCount,
+	NPVariant *result) {
+
+	if (argCount < 1 ||
+		!NPVARIANT_IS_OBJECT(args[0])) {
+		NPN_SetException(this, "invalid params passed to function");
+		return true;
+	}
+
+	// add ref count to callback object so it won't delete
+	NPN_RetainObject(NPVARIANT_TO_OBJECT(args[0]));
+
+	// post to separate thread so that we are responsive
+	return thread_->PostTask(
+		std::bind(
+			&nsScriptableObjectOverwolfSample::Add64Task,
+			this,
+			NPVARIANT_TO_OBJECT(args[0])));
 }
 
 bool nsScriptableObjectOverwolfSample::FinishReading(
@@ -206,7 +272,7 @@ void nsScriptableObjectOverwolfSample::EchoTask(
     arg);
 
 	
-  INT32_TO_NPVARIANT(memWolfReader.InitMemoryRead(message.c_str(), caption.c_str(), offset),arg);
+  DOUBLE_TO_NPVARIANT(memWolfReader.InitMemoryRead(message.c_str(), caption.c_str(), offset),arg);
   //STRINGN_TO_NPVARIANT(message.c_str(),message.size(),arg);
   // fire callback
   NPN_InvokeDefault(
@@ -235,7 +301,7 @@ void nsScriptableObjectOverwolfSample::Echo64Task(
 		arg);
 
 
-	INT32_TO_NPVARIANT(memWolfReader.InitMemoryRead64(message.c_str(), caption.c_str(), offset), arg);
+	DOUBLE_TO_NPVARIANT(memWolfReader.InitMemoryRead64(message.c_str(), caption.c_str(), offset), arg);
 	//STRINGN_TO_NPVARIANT(message.c_str(),message.size(),arg);
 	// fire callback
 	NPN_InvokeDefault(

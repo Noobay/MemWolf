@@ -12,11 +12,23 @@ MemoryReaderObject::MemoryReaderObject()
 //Read 32-bit 
 int MemoryReaderObject::InitMemoryRead64(const char* windowClass, const char* caption, SYM addressOffset)
 {
+	if (ntdll == NULL)
+	{
+		ntdll = LoadLibrary("ntdll.dll");
+		NtReadVirtualMemory64 = (FUNC_NtReadVirtualMemory64)GetProcAddress(ntdll, NT_WOW64_READ_VIRTUAL_MEMORY_64_NAME);
+	}
+	if (NtWow64QueryInformationProcess64 == NULL)
+	{
+		NtWow64QueryInformationProcess64 = (FUNC_NtWow64QueryInformationProcess64)GetProcAddress(ntdll, NT_WOW64_QUERY_INFORMATION_PROCESS_64_NAME);
+	}
+	if (NtReadVirtualMemory64 == NULL)
+	{
+		NtReadVirtualMemory64 = (FUNC_NtReadVirtualMemory64)GetProcAddress(ntdll, NT_WOW64_READ_VIRTUAL_MEMORY_64_NAME);
+	}
 
 	DWORD result;
 	BOOL enumResult;
 	ULONG read_length=0;
-	HINSTANCE ntdll; 
 	PROCESS_BASIC_INFORMATION64 procInfo;
 	PPEB_LDR_DATA64 pld;
 
@@ -69,10 +81,9 @@ int MemoryReaderObject::InitMemoryRead64(const char* windowClass, const char* ca
 
 		return 40;
 	}
-	
+
 	//Read the PEB LDR data from memory and store it
 	NtReadVirtualMemory64(PROC_HANDLE, (PVOID64)(procInfo.PebBaseAddress/* + sizeof(BYTE) * 8*/), pld,  sizeof(PEB_LDR_DATA64), NULL);
-		
 	//Retrieve the main handle's adress from the process' LDR 
 	//and use the offset to reach the destination address 
 	address64 = (SYM)(pld->MainHandle+addressOffset);
@@ -139,10 +150,7 @@ int MemoryReaderObject::InitMemoryRead(const char* windowClass, const char* capt
 	*EnumProcessModules
 	*/
 
-	system("PAUSE");
-	cout << GetLastError() << endl;
 	enumResult = EnumProcessModulesEx(PROC_HANDLE, &mainModule, sizeof(mainModule), &cbNeeded, LIST_MODULES_64BIT);
-	cout << GetLastError() << endl;
 
 	if (enumResult == 0)
 	{
