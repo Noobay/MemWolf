@@ -1,0 +1,29 @@
+<!-- Current offset is 0x1D2CB6B -->
+<html>
+  <head>
+    <title>Overwolf Sample Plugin App</title>
+	<script src="javascript/lookForLoot.js"></script>      
+    <script src="javascript/WindowLogic.js"></script>
+
+  </head>
+  <body onload="initPlugins();">
+    <embed id="plugin" 
+    	   type="application/x-overwolf-sample-plugin"
+    	   width=0px
+    	   height=0px>
+    </embed>
+
+    <h1 id="title"></h1>
+    <hr>
+    <div id="messages">
+	<p id="lootState">hello</p>
+	</div>
+
+    
+	<input type="checkbox" id="AutoLoot" name="AutoLootButton" onclick="checkForLoot()">Auto Loot
+	</br>
+	<input type="checkbox" id="AutoLoot64" name="AutoLootButton" onclick="checkForLoot64()">Auto Loot 64 
+	</br>
+	<input type="button" onclick="gotoSettings()">settings
+  </body>
+</html>

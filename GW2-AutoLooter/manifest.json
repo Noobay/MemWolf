@@ -1,0 +1,49 @@
+{
+  "manifest_version":"1",
+  "type":"WebApp",
+  "meta":{
+    "name":"GW2-AutoLooter ",
+    "version":"1.0.0.1",
+    "minimum-overwolf-version": "0.77.4.0",
+    "author":"Overwolf",
+    "icon":"images/icon.png",
+    "icon_gray":"images/icon_gray.png",
+    "description":"Sample app for using the sample NPAPI plugin",
+    "permissions":["GameControl"]
+  },
+  "data": {
+    "start_window":"index",
+    "windows":{
+      "index":{
+        "file":"index.html",
+        "transparent":false,
+        "resizable":true,
+        "show_in_taskbar": true,
+        "size": {
+          "width": 400,
+          "height": 400
+        },
+        "start_position": {
+          "Top": 100,
+          "Left": 300
+        }
+      },
+	  "settings":{
+		"file":"settings.html",
+		"transparent":false,
+		"resizable":true,
+		"size": {
+		  "width": 300,
+		  "height": 300
+		},
+		"start_position": {
+		  "Top": 100,
+		  "Left": 300
+		}  
+	 }
+  },
+    "plugins": [
+      "npOverwolfSamplePlugin.dll"
+    ] 
+ }
+}
