@@ -1,30 +1,39 @@
 # README #
 
-Getting MemWolf up and running
+**MemWolf** is an **OverWolf** plugin for interactions with 32-bit and 64-bit process memory 
+from the 32-bit **OverWolf** application running.
 
-### What is this repository for? ###
+on 64-bit machines we are using the fact that 32-bit programs run under WOW64 (Windows on Windows 64)
+to read 64-bit process memory
 
-The repo contains
-* Backend for Memory Reading 64 and 32 bit process from a 32 bit process running under wow64 
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### The repo contains ###
+* The Code for Memory Reading 64 and 32 bit process from a 32 bit process running under wow64 
+* A **Sample Overwolf Application** 
+* it is based off of the [Overwolf Sample Plugin](https://github.com/overwolf/overwolf-sample-plugin)
+* although noted "deprecated", Overwolfs' system relies on [Awesomium](http://www.awesomium.com/) - and this feature is not likely to go anytime soon.
 
-### How do I get set up? ###
+### Setting it up ###
+* Get XulRunnerSDK 1.9.2(Must be this version) From [Here](http://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/3.6.28/sdk/xulrunner-3.6.28.en-US.win32.sdk.zip)
+* Extract XulRunnerSDK such that both ***this*** repo and the ***XulRunnerSDK*** are in the same folder. 
+* Build the dll in the projects' folder
+* Move the dll to the application folder
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+#### if you are making your own ####
+* open the *manifest.json* file in your applications' folder, and 
+  note the line - 
 
-### Contribution guidelines ###
+`"plugins": [ 
+      "npOverwolfReadMemorySamplePlugin.dll] `      
+* Either include your dll by adding it to the list, or replace the existing dll.
+    
+*addition example*- 
 
-* Writing tests
-* Code review
-* Other guidelines
+`"plugins": [ 
+      "npOverwolfReadMemorySamplePlugin.dll", "npAnotherSample.dll"] `  
 
-### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+### Important To Note ###
+More information about **NPRuntime** - the method used to implement the plugin - 
+can be found [HERE](https://developer.mozilla.org/en-US/docs/Plugins/Guide/Scripting_plugins)
+### Feel free to help me expand this repo ###
+* Contact me @ Noobay@Humanoid.net
