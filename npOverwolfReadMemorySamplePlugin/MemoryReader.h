@@ -43,7 +43,7 @@ public:
 	    FUNC_NtReadVirtualMemory64 NtReadVirtualMemory64;
 	#pragma endregion 
 
-		//function declarations
+	//function declarations
 	#pragma region Function declarations
 		
 		template <typename _ret_t> _ret_t ReadMemory();
@@ -55,8 +55,8 @@ public:
 	#pragma endregion
 
 
-		//global variables 
-	#pragma region Global Variables
+	//variable declarations 
+	#pragma region Variable declarations
 		HWND  WINDOW_HANDLE;
 		HANDLE PROC_HANDLE;
 		DWORD PROC_ID;
