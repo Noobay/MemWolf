@@ -142,10 +142,7 @@ int InitReadMemory(const char* windowClass, const char* caption, DWORD addressOf
 	address = (unsigned long long)((UINT_PTR)mainModule  + addressOffset);
 
 	string number;
-	stringstream stristream;
 
-	stristream << address;
-	stristream >> number;
 
 	byte testByte = 0 ;
 

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="utils\Thread.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\CriticalSectionLock.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="nsScriptableObjectBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="plugin_common\np_entry.cpp">
+      <Filter>Source Files\plugin_common</Filter>
+    </ClCompile>
+    <ClCompile Include="plugin_common\npn_gate.cpp">
+      <Filter>Source Files\plugin_common</Filter>
+    </ClCompile>
+    <ClCompile Include="plugin_common\npp_gate.cpp">
+      <Filter>Source Files\plugin_common</Filter>
+    </ClCompile>
+    <ClCompile Include="MemWolf.cpp">
+      <Filter>Source Files\MemWolf</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryReader.cpp">
+      <Filter>Source Files\MemoryReader</Filter>
+    </ClCompile>
+    <ClCompile Include="nsPluginInstanceOverwolfReadMemorySample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nsScriptableObjectOverwolfReadMemorySample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils\Thread.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\CriticalSectionLock.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\SingletonClass.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="nsScriptableObjectBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="plugin_common\pluginbase.h">
+      <Filter>Header Files\plugin_common</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="MemWolf.h">
+      <Filter>Header Files\MemWolf</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryReader.h">
+      <Filter>Header Files\MemoryReader</Filter>
+    </ClInclude>
+    <ClInclude Include="nsScriptableObjectOverwolfReadMemorySample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nsPluginInstanceOverwolfReadMemorySample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="winternl64.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="wow64imp.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{7fcc5e2e-2251-4aaf-8675-0dc67c8a47d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{b55a1809-1652-4c9e-a40c-2dc12d045a48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\plugin_common">
+      <UniqueIdentifier>{c530847d-4240-426d-b84c-b14ed6518d47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\plugin_common">
+      <UniqueIdentifier>{19305149-d8ab-4b33-84c4-cb9a6c60ce18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{7df4945f-1d61-4d84-ba1b-d79d7b78c120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{a5a8864a-b84f-4f5c-b40e-62fffe4550fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{b659ece1-45d1-4758-9ed2-c0da2a107e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MemWolf">
+      <UniqueIdentifier>{60d08ec2-edcc-464f-9800-7ff45654233e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MemoryReader">
+      <UniqueIdentifier>{c79a07a6-c650-4d89-8da9-88e42289ef99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MemWolf">
+      <UniqueIdentifier>{55661345-ac8b-4c16-995c-b98e9a1c6a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MemoryReader">
+      <UniqueIdentifier>{cb11ccc7-84d8-4e4d-b1f0-4c5428b54275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Types">
+      <UniqueIdentifier>{f37d6439-3896-4ab1-9a26-bc8f3768444d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="npOverwolfReadMemorySamplePlugin.def">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="npOverwolfReadMemorySamplePlugin.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,14 +1,2 @@
-﻿  MemoryRead.cpp
-MemoryRead.cpp(120): warning C4101: 'enumResult': unreferenced local variable
-MemoryRead.cpp(117): warning C4101: 'cbNeeded': unreferenced local variable
-MemoryRead.cpp(126): warning C4101: 'moduleHandle': unreferenced local variable
-MemoryRead.cpp(122): warning C4101: 'ntdll': unreferenced local variable
-MemoryRead.cpp(119): warning C4101: 'mainModule': unreferenced local variable
-MemoryRead.cpp(304): warning C4800: 'BOOL': forcing value to bool 'true' or 'false' (performance warning)
-  Generating code
-  2 of 49 functions ( 4.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  MemoRead.vcxproj -> C:\Users\user\documents\visual studio 2015\Projects\MemoRead\Release\MemoRead.exe
-  MemoRead.vcxproj -> C:\Users\user\documents\visual studio 2015\Projects\MemoRead\Release\MemoRead.pdb (Full PDB)
+﻿  MemoRead.vcxproj -> C:\Users\user\Documents\My Repositories\MemoryRead\overwolfmemoryread\TestProject\Release\MemoRead.exe
+  MemoRead.vcxproj -> C:\Users\user\Documents\My Repositories\MemoryRead\overwolfmemoryread\TestProject\Release\MemoRead.pdb (Full PDB)

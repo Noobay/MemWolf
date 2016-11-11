@@ -150,10 +150,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MemoryRead.cpp" />
+    <ClInclude Include="MemoryReader.h" />
+    <ClInclude Include="Types\winternl64.h" />
+    <ClInclude Include="Types\wow64imp.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MemoryRead.h" />
+    <ClCompile Include="AppTest.cpp" />
+    <ClCompile Include="MemoryReader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

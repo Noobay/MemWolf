@@ -1,3 +1,0 @@
-﻿  nsScriptableObjectOverwolfSample.cpp
-c:\users\user\documents\my repositories\memoryread\overwolfmemoryread\npoverwolfsampleplugin\nsscriptableobjectoverwolfsample.cpp(206): warning C4244: 'argument' : conversion from 'double' to 'DWORD', possible loss of data
-c:\users\user\documents\my repositories\memoryread\overwolfmemoryread\npoverwolfsampleplugin\nsscriptableobjectoverwolfsample.cpp(235): warning C4244: 'argument' : conversion from 'double' to 'SYM', possible loss of data

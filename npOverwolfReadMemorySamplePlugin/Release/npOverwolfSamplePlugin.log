@@ -1,0 +1,20 @@
+﻿  main.cpp
+  MemoryReader.cpp
+MemoryReader.cpp(49): warning C4101: 'enumResult' : unreferenced local variable
+MemoryReader.cpp(194): warning C4002: too many actual parameters for macro 'assert'
+MemoryReader.cpp(210): warning C4002: too many actual parameters for macro 'assert'
+MemoryReader.cpp(240): warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+  MemWolf.cpp
+  nsScriptableObjectBase.cpp
+  nsScriptableObjectOverwolfReadMemorySample.cpp
+nsScriptableObjectOverwolfReadMemorySample.cpp(275): warning C4244: 'argument' : conversion from 'double' to 'DWORD', possible loss of data
+nsScriptableObjectOverwolfReadMemorySample.cpp(304): warning C4244: 'argument' : conversion from 'double' to 'SYM', possible loss of data
+  nsPluginInstanceOverwolfReadMemorySample.cpp
+  npn_gate.cpp
+  npp_gate.cpp
+  np_entry.cpp
+  CriticalSectionLock.cpp
+  Thread.cpp
+  Generating Code...
+     Creating library .\Release\npOverwolfReadMemorySamplePlugin.lib and object .\Release\npOverwolfReadMemorySamplePlugin.exp
+  npOverwolfSamplePlugin.vcxproj -> C:\Users\user\Documents\My Repositories\MemoryRead\overwolfmemoryread\npOverwolfReadMemorySamplePlugin\.\Release\npOverwolfReadMemorySamplePlugin.dll
