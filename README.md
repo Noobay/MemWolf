@@ -1,9 +1,9 @@
 # README #
 
 **MemWolf** is an **OverWolf** plugin for interactions with 32-bit and 64-bit process memory 
-from the 32-bit **OverWolf** application running.
+from the 32-bit **OverWolf** application.
 
-on 64-bit machines we are using the fact that 32-bit programs run under WOW64 (Windows on Windows 64)
+on 64-bit Windows machines we are using the fact that 32-bit programs run under WOW64 (Windows on Windows 64)
 to read 64-bit process memory
 
 ### The repo contains ###
