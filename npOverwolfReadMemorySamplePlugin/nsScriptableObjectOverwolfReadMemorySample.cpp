@@ -272,7 +272,7 @@ void nsScriptableObjectOverwolfReadMemorySample::InitReadMemoryTask(
     arg);
 
 	
-  DOUBLE_TO_NPVARIANT(memWolfReader.InitMemoryRead(message.c_str(), caption.c_str(), offset),arg);
+  DOUBLE_TO_NPVARIANT(memWolfReader.InitMemoryOperation(message.c_str(), caption.c_str(), offset),arg);
   //STRINGN_TO_NPVARIANT(message.c_str(),message.size(),arg);
   // fire callback
   NPN_InvokeDefault(
@@ -301,7 +301,7 @@ void nsScriptableObjectOverwolfReadMemorySample::InitReadMemory64Task(
 		arg);
 
 
-	DOUBLE_TO_NPVARIANT(memWolfReader.InitMemoryRead64(message.c_str(), caption.c_str(), offset), arg);
+	DOUBLE_TO_NPVARIANT(memWolfReader.InitMemoryOperation64(message.c_str(), caption.c_str(), offset), arg);
 	//STRINGN_TO_NPVARIANT(message.c_str(),message.size(),arg);
 	// fire callback
 	NPN_InvokeDefault(

@@ -1,5 +1,2 @@
-﻿  MemoryReader.cpp
-c:\users\user\documents\my repositories\memoryread\overwolfmemoryread\npoverwolfreadmemorysampleplugin\memoryreader.cpp(36): warning C4101: 'enumResult' : unreferenced local variable
-c:\users\user\documents\my repositories\memoryread\overwolfmemoryread\npoverwolfreadmemorysampleplugin\memoryreader.cpp(181): warning C4002: too many actual parameters for macro 'assert'
-c:\users\user\documents\my repositories\memoryread\overwolfmemoryread\npoverwolfreadmemorysampleplugin\memoryreader.cpp(197): warning C4002: too many actual parameters for macro 'assert'
-c:\users\user\documents\my repositories\memoryread\overwolfmemoryread\npoverwolfreadmemorysampleplugin\memoryreader.cpp(227): warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+﻿  Skipping... (no relevant changes detected)
+  nsScriptableObjectOverwolfReadMemorySample.cpp

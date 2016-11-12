@@ -1,16 +1,19 @@
 # README #
 
 **MemWolf** is an **OverWolf** plugin for interactions with 32-bit and 64-bit process memory 
-from the 32-bit **OverWolf** application.
+from the 32-bit **OverWolf** application running.
 
-on 64-bit Windows machines we are using the fact that 32-bit programs run under WOW64 (Windows on Windows 64)
+on 64-bit machines we are using the fact that 32-bit programs run under WOW64 (Windows on Windows 64)
 to read 64-bit process memory
 
+###What is it good for?###
+* Combined with tables from ArtmMoney and CheatEngine, this platform can be used to create trainers as Overwolf applications.
+
 ### The repo contains ###
-* The Code for Memory Reading 64 and 32 bit process from a 32 bit process running under wow64 
+* Code for Memory Reading 64 and 32 bit process from a 32 bit process running under WOW4 
 * A **Sample Overwolf Application** 
 * it is based off of the [Overwolf Sample Plugin](https://github.com/overwolf/overwolf-sample-plugin)
-* although noted "deprecated", Overwolfs' system relies on [Awesomium](http://www.awesomium.com/) - and this feature is not likely to go anytime soon.
+* although noted "deprecated", Overwolfs' system relies on [Awesomium](http://www.awesomium.com/) - and this feature is not likely to go away anytime soon.
 
 ### Setting it up ###
 * Get XulRunnerSDK 1.9.2(Must be this version) From [Here](http://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/3.6.28/sdk/xulrunner-3.6.28.en-US.win32.sdk.zip)

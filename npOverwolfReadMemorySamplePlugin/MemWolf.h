@@ -22,7 +22,7 @@
 
 #include "MemoryReader.h"
 
-class MemWolfObject : public MemoryReaderObject
+class MemWolfObject : public MemoryOperationObject
 {
 public:
 	bool IsLootAvailable();

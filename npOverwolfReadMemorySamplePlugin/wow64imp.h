@@ -5,14 +5,14 @@
 
 //definitions for essential 64 bit memory mangling functions from ntdll
 #pragma region ntdll function definitions
-typedef NTSTATUS(NTAPI *FUNC_NtReadVirtualMemory64)
+typedef NTSTATUS(NTAPI *FUNC_NtWow64ReadVirtualMemory64)
 (
 	IN  HANDLE  ProcessHandle,
 	IN  PVOID64 BaseAddress,
 	OUT PVOID   Buffer,
 	IN  ULONGLONG BufferLength,
 	OUT PULONGLONG ReturnLength OPTIONAL
-);
+	);
 typedef NTSTATUS(NTAPI *FUNC_NtWow64QueryInformationProcess64)
 (
 	IN  HANDLE ProcessHandle,
@@ -20,7 +20,8 @@ typedef NTSTATUS(NTAPI *FUNC_NtWow64QueryInformationProcess64)
 	OUT PVOID  ProcessInformation64,
 	IN  ULONG  Length,
 	OUT PULONG ReturnLength OPTIONAL
-);
+	);
+typedef FUNC_NtWow64ReadVirtualMemory64 FUNC_NtWow64WriteVirtualMemory64;
 #pragma endregion
 
 #endif

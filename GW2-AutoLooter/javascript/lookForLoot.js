@@ -37,12 +37,12 @@ function initPlugins()
 function checkForLoot()
 {
  	//init memory
-	plugin().echo("ArenaNet_Dx_Window_Class","", lootAddress, function(data){a=data; document.getElementById("title").innerHTML = data;});
+	plugin().InitReadMemory("ArenaNet_Dx_Window_Class","", lootAddress, function(data){a=data; document.getElementById("title").innerHTML = data;});
 
 	if(cbx_CheckLoot.checked)
 	{
 		lootInterval = setInterval(function(){ 	 
-			plugin().add(function(data){ 
+			plugin().GW2IsLootAvailable(function(data){ 
 			obj = document.getElementById('lootState');
 			obj.innerHTML = data;
 			if(data)
@@ -60,11 +60,11 @@ function checkForLoot()
  
 function checkForLoot64()
 {
-	plugin().echo64("ArenaNet_Dx_Window_Class","", lootAddress, function(data){a=data; document.getElementById("title").innerHTML = data;});
+	plugin().InitReadMemory64("ArenaNet_Dx_Window_Class","", lootAddress, function(data){a=data; document.getElementById("title").innerHTML = data;});
 	if(cbx_CheckLoot64.checked)
 	{
 		lootInterval = setInterval(function(){ 	
-			plugin().add64(function(data){ 
+			plugin().GW2IsLootAvailable64(function(data){ 
 
 			obj = document.getElementById('lootState');
 			obj.innerHTML = data;
