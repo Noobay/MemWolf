@@ -13,7 +13,7 @@ to read 64-bit process memory
 * Code for Memory Reading 64 and 32 bit process from a 32 bit process running under WOW4 
 * A **Sample Overwolf Application** 
 * it is based off of the [Overwolf Sample Plugin](https://github.com/overwolf/overwolf-sample-plugin)
-* although noted "deprecated", Overwolfs' system relies on [Awesomium](http://www.awesomium.com/) - and this feature is not likely to go away anytime soon.
+* which means it is already not supported by Overwolf (but will still run on their platform, for now)
 
 ### Setting it up ###
 * Get XulRunnerSDK 1.9.2(Must be this version) From [Here](http://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/3.6.28/sdk/xulrunner-3.6.28.en-US.win32.sdk.zip)
