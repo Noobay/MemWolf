@@ -10,12 +10,12 @@ Functions:
 this is the result of ".exe"+offset.
 
 
-This function takes 3 parameters and a lambda function in the following order-<br>
+This function takes 3 parameters and a function in the following order-<br>
 NOTE: you can pass an empty string to either WindowClass or WindowName to signify "Unknown".
 ```
 Parameter 1 | Parameter 2 | Parameter 3 | Parameter 4
 ------------|-------------|-------------|-----------------
-WindowClass | WindowName  | LootAddress | LambdaFunction()
+WindowClass | WindowName  | LootAddress | Function
 ```
 
 *Return Values*:<br>
@@ -47,12 +47,12 @@ plugin().InitReadMemory(myWindowName,
 **InitMemoryRead64** - gets the memory location of the data we want to read from a 62-bit process and sets it in the base class, this is the result of ".exe"+offset.
 
 
-This function takes 3 parameters and a lambda function in the following order- 
+This function takes 3 parameters and a function in the following order- 
 NOTE: you can pass an empty string to either WindowClass or WindowName to signify "Unknown".
 ```
 Parameter 1 | Parameter 2 | Parameter 3 | Parameter 4
 ------------|-------------|-------------|-----------------
-WindowClass | WindowName  | LootAddress | LambdaFunction()
+WindowClass | WindowName  | LootAddress | Function
 ```
 
 *Return Values*:<br>
@@ -84,7 +84,7 @@ plugin().InitReadMemory64(myWindowName,
 **GW2IsLootAvailable** - returns whether there is loot available or not as a boolean in a running 32-bit Guild-Wars 2 instance.
 
 
-NOTE: this function takes no parameter apart from a lambda function because the data from *InitMemoryRead* is saved to the class.
+NOTE: this function takes no parameter apart from a function because the data from *InitMemoryRead* is saved to the class.
 
 
 Example Usage:
@@ -108,7 +108,7 @@ setInterval(function(){
 **GW2IsLootAvailable64** - returns whether there is loot available or not as a boolean in a running 64-bit Guild-Wars 2 instance.
 
 
-NOTE: this function takes no parameter apart from a lambda function because the data from *InitMemoryRead* is saved to the class.
+NOTE: this function takes no parameter apart from a function because the data from *InitMemoryRead* is saved to the class.
 
 
 Example Usage:
