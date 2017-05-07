@@ -19,7 +19,7 @@ to read 64-bit process memory
 * Get XulRunnerSDK 1.9.2(Must be this version) From [Here](http://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/3.6.28/sdk/xulrunner-3.6.28.en-US.win32.sdk.zip)
 * Extract XulRunnerSDK such that both ***this*** repo and the ***XulRunnerSDK*** are in the same folder. 
 * Build the dll in the projects' folder
-* Move the dll to the application folder
+* Copy the dll to the applications folder
 
 #### if you are making your own ####
 * open the *manifest.json* file in your applications' folder, and 
