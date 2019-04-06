@@ -21,7 +21,7 @@ WindowClass | WindowName  | LootAddress | Function
 *Return Values*:<br>
 1 - Success
 10 - Failed Finding Window
-20 - Failed Getting Retrieving ID
+20 - Failed Retrieving ID
 30 - Failed Opening Process
 40 - Failed Enumerating Modules
 
