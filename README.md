@@ -39,4 +39,3 @@ to read 64-bit process memory
 More information about **NPRuntime** - the method used to implement the plugin - 
 can be found [HERE](https://developer.mozilla.org/en-US/docs/Plugins/Guide/Scripting_plugins)
 ### Feel free to help me expand this repo ###
-* Contact me @ Noobay@Humanoid.net
